@@ -38,6 +38,16 @@
             <artifactId>jsr305</artifactId>
             <version>2.0.1</version>
         </dependency>
+        
+    <!--************************************************************************
+        * Miscellaneous Dependencies
+        ************************************************************************-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>13.0.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     
     <build>
@@ -58,7 +68,6 @@
                 <artifactId>android-maven-plugin</artifactId>
                 <configuration>
                     <sdk>
-                        <path>/home/moxx/android-sdk-linux</path>
                         <platform>16</platform>
                     </sdk>
                 </configuration>
