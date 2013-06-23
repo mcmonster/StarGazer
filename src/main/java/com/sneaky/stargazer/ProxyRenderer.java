@@ -5,6 +5,9 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.sneaky.stargazer.game.GameModule;
+import com.sneaky.stargazer.graphics.MVP;
+import com.sneaky.stargazer.graphics.Renderer;
 import com.sneaky.stargazer.io.ClickHandler;
 import com.sneaky.stargazer.io.DragHandler;
 import com.sneaky.stargazer.io.LongPressHandler;
@@ -21,9 +24,10 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class ProxyRenderer implements ClickHandler, DragHandler, 
         GLSurfaceView.Renderer, LongPressHandler, ZoomHandler {
+    /** Activity registered with the Android OS. */
     private final ProxyActivity activity;
     
-    private StratagemRenderer currentRenderer;
+    private Renderer currentRenderer;
     
     private ProxyView view;
     
@@ -83,11 +87,11 @@ public class ProxyRenderer implements ClickHandler, DragHandler,
 
     @Override
     public void onSurfaceCreated(GL10 arg0, EGLConfig arg1) {
-        Injector injector = Guice.createInjector(new OpeningMenuModule(this));
-        currentRenderer = injector.getInstance(OpeningMenuRenderer.class);
+        Injector injector = Guice.createInjector(new GameModule(this));
+        currentRenderer = injector.getInstance(Renderer.class);
     }
     
-    public synchronized void setRenderer(final StratagemRenderer renderer) {
+    public synchronized void setRenderer(final Renderer renderer) {
         currentRenderer.close();
         currentRenderer = renderer;
     }

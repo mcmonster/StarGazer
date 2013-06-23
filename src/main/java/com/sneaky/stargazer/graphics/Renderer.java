@@ -13,14 +13,14 @@ import com.sneaky.stargazer.io.ZoomHandler;
  * 
  * @author R. Matt McCann
  */
-public abstract class BaseRenderer implements ClickHandler, LongPressHandler, 
+public abstract class Renderer implements ClickHandler, LongPressHandler, 
         DragHandler, ZoomHandler {
     private final GameFlowController gameFlowController;
     
     /**
      * @param gameFlow Must not be null.
      */
-    public BaseRenderer(GameFlowController gameFlowController) {
+    public Renderer(GameFlowController gameFlowController) {
         this.gameFlowController = checkNotNull(gameFlowController);
         
         // Enable transparency blending

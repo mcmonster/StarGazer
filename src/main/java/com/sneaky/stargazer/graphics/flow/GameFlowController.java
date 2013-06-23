@@ -4,12 +4,14 @@ import android.opengl.GLSurfaceView;
 import static com.google.common.base.Preconditions.*;
 import com.google.common.eventbus.EventBus;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Controls the update-render flow of the game.
  * 
  * @author R. Matt McCann
  */
+@Singleton
 public class GameFlowController extends Thread {
     /** Whether or not the game flow is running. */
     private boolean isRunning = false;
