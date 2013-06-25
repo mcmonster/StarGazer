@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import static com.google.common.base.Preconditions.*;
+import com.google.common.eventbus.EventBus;
 import com.sneaky.stargazer.device.Device;
+import com.sneaky.stargazer.device.OnPauseEvent;
+import com.sneaky.stargazer.device.OnResumeEvent;
 import com.sneaky.stargazer.io.PressTimer;
 import com.sneaky.stargazer.misc.points.Point2D;
 import com.sneaky.stargazer.misc.points.PointHelper;
@@ -63,6 +66,20 @@ public class ProxyView extends GLSurfaceView {
         // Set up the input detectors
         this.zoomGestureDetector = new ScaleGestureDetector(
                 activity.getApplicationContext(), new ZoomGestureDetector(renderer));
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public void onPause() {
+        super.onPause();
+        renderer.onPause();
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public void onResume() {
+        super.onResume();
+        renderer.onResume();
     }
     
     /** {@inheritDoc} */

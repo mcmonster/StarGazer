@@ -1,4 +1,4 @@
-package com.sneaky.stargazer.graphics;
+package com.sneaky.stargazer.graphics.textures;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,6 +11,8 @@ import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import static com.google.common.base.Preconditions.checkArgument;
 import com.google.inject.Inject;
+import com.sneaky.stargazer.graphics.Color;
+import com.sneaky.stargazer.graphics.DrawMath;
 import com.sneaky.stargazer.misc.points.Dimension;
 
 /**

@@ -1,6 +1,7 @@
 package com.sneaky.stargazer.game;
 
 import static com.google.common.base.Preconditions.*;
+import com.google.common.eventbus.EventBus;
 import com.google.inject.Inject;
 import com.sneaky.stargazer.game.background.Background;
 import com.sneaky.stargazer.graphics.MVP;
@@ -17,22 +18,29 @@ public class GameRenderer extends Renderer {
     /** Background of the scene. */
     private final Background background;
     
+    /** The fox character. */
+    private final Fox fox;
+    
     /**
      * @param background Must not be null.
      * @param gameFlowController Must not be null. 
      */
     @Inject
     public GameRenderer(Background background,
-                        GameFlowController gameFlowController) {
-        super(gameFlowController);
+                        Fox fox,
+                        GameFlowController gameFlowController,
+                        EventBus notifier) {
+        super(gameFlowController, notifier);
         
         this.background = checkNotNull(background);
+        this.fox = checkNotNull(fox);
     }
     
     /** {@inheritDocs} */
     @Override
-    public void drawFrame(MVP mvp) {
+    protected void drawFrameExt(MVP mvp) {
         background.render(mvp);
+        fox.render(mvp);
     }
 
     public boolean handleClick(Point2D clickLocation) {

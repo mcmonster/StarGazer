@@ -5,7 +5,7 @@ import android.opengl.GLES20;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sneaky.R;
+import com.sneaky.stargazer.R;
 import com.sneaky.stargazer.graphics.DrawUtils;
 import com.sneaky.stargazer.misc.Constants;
 

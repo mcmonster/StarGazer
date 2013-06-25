@@ -32,6 +32,11 @@ public class Point2D {
     public void addToX(float xAdd) { x += xAdd; }
     public void addToY(float yAdd) { y += yAdd; }
 
+    @Override
+    public Point2D clone() {
+        return new Point2D(x, y);
+    }
+    
     public float distanceTo(Point2D target) {
         float xFactor = this.x - target.x;
         float yFactor = this.y - target.y;
@@ -83,5 +88,10 @@ public class Point2D {
         result.y = this.y - subtractee.y;
         
         return result;
+    }
+    
+    @Override
+    public String toString() {
+        return "" + x + "," + y;
     }
 }

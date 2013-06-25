@@ -3,7 +3,7 @@ package com.sneaky.stargazer.graphics.shader;
 import android.content.Context;
 import android.opengl.GLES20;
 import com.google.inject.Inject;
-import com.sneaky.R;
+import com.sneaky.stargazer.R;
 import com.sneaky.stargazer.misc.Constants;
 
 /**

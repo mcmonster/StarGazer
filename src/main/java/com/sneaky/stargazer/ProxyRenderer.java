@@ -3,8 +3,11 @@ package com.sneaky.stargazer;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import com.google.common.eventbus.EventBus;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.sneaky.stargazer.device.OnPauseEvent;
+import com.sneaky.stargazer.device.OnResumeEvent;
 import com.sneaky.stargazer.game.GameModule;
 import com.sneaky.stargazer.graphics.MVP;
 import com.sneaky.stargazer.graphics.Renderer;
@@ -38,6 +41,8 @@ public class ProxyRenderer implements ClickHandler, DragHandler,
     public ProxyActivity getActivity() { return activity; }
     
     public Context getContext() { return activity.getApplicationContext(); }
+    
+    public EventBus getNotifier() { return currentRenderer.getNotifier(); }
     
     public ProxyView getView() { return view; } 
     
@@ -79,6 +84,18 @@ public class ProxyRenderer implements ClickHandler, DragHandler,
         currentRenderer.drawFrame(new MVP());
     }
 
+    public void onPause() {
+        if (currentRenderer != null) {
+            currentRenderer.getNotifier().post(new OnPauseEvent());
+        }
+    }
+    
+    public void onResume() {
+        if (currentRenderer != null) {
+            currentRenderer.getNotifier().post(new OnResumeEvent());
+        }
+    }
+    
     @Override
     public void onSurfaceChanged(GL10 arg0, int width, int height) {
         // Set up the view-port
