@@ -1,6 +1,7 @@
 package com.sneaky.stargazer.game;
 
 import com.google.inject.Key;
+import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.name.Names;
 import com.sneaky.stargazer.R;
 import com.sneaky.stargazer.BaseModule;
@@ -9,6 +10,7 @@ import com.sneaky.stargazer.graphics.Renderer;
 import com.sneaky.stargazer.graphics.textures.Texture;
 import com.sneaky.stargazer.graphics.textures.TextureFactory;
 import com.sneaky.stargazer.device.SensorMonitor;
+import com.sneaky.stargazer.game.Star.StarFactory;
 import com.sneaky.stargazer.graphics.textures.Animation;
 import java.util.Map;
 
@@ -35,11 +37,17 @@ public class GameModule extends BaseModule {
     protected void configure() {
         super.configure();
         
-        bind(SensorMonitor.class).asEagerSingleton();
         bind(Renderer.class).to(GameRenderer.class);
+        bind(SensorMonitor.class).asEagerSingleton();
+        bind(StarFallPattern.class).to(SimpleStarFallPattern.class);
         
+        installFactories();
         loadAnimations();
         loadTextures();
+    }
+    
+    private void installFactories() {
+        install(new FactoryModuleBuilder().build(StarFactory.class));
     }
     
     private void loadAnimations() {
@@ -64,6 +72,9 @@ public class GameModule extends BaseModule {
         Map<String, Texture> textures = getTextures();
         textures.put("Fox", new Texture(R.drawable.foxstanding));
         textures.put("Grass", new Texture(8.0f, R.drawable.grass));
+        textures.put("ProgressBar", new Texture(8.0f, R.drawable.progressbar));
+        textures.put("ProgressBarMoon", new Texture(R.drawable.progressbarmoon));
+        textures.put("SimpleStar", new Texture(R.drawable.simplestar));
         textures.put("Sky", new Texture(4.0f, R.drawable.sky));
         
         for (Map.Entry<String, Texture> entry : textures.entrySet()) {

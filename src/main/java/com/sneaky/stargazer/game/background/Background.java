@@ -50,7 +50,7 @@ public class Background implements Renderable {
         
         // Render the grass
         model = mvp.peekCopyM();
-        Matrix.translateM(model, Constants.NO_OFFSET, 0.0f, -0.5f + 0.5f / grass.getAspectRatio(), 0.0f);
+        Matrix.translateM(model, Constants.NO_OFFSET, 0.0f, -0.3f + 0.5f / grass.getAspectRatio(), 0.0f);
         Matrix.scaleM(model, Constants.NO_OFFSET, 1.0f, 1.0f / grass.getAspectRatio(), 1.0f);
         shader.setMVPMatrix(mvp.collapseM(model));
         shader.setTexture(grass.getHandle());

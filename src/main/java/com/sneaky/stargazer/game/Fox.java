@@ -1,7 +1,6 @@
 package com.sneaky.stargazer.game;
 
 import android.opengl.Matrix;
-import android.util.FloatMath;
 import static com.google.common.base.Preconditions.*;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -77,13 +76,21 @@ public class Fox implements Renderable {
         
         renderingHeight = 0.5f;
         renderingWidth = 0.5f / device.getAspectRatio();
-        renderingPosition = new Point2D(0.0f, -0.5f + renderingHeight / 2.0f);
+        renderingPosition = new Point2D(0.0f, -0.3f + renderingHeight / 2.0f);
         
-        height = 0.2f;
-        width = 0.2f;
+        height = renderingHeight * 0.25f;
+        width = renderingWidth * 0.33f;
         
         notifier.register(this);
     }
+    
+    public float getHeight() { return height; }
+    public Point2D getPosition() { 
+        float xPos = renderingPosition.getX();
+        float yPos = renderingPosition.getY() - (renderingHeight - height) / 2.0f; 
+        return new Point2D(xPos, yPos); 
+    }
+    public float getWidth() { return width; }
     
     @Subscribe
     public void handleRotationEvent(RotationEvent event) {
@@ -139,6 +146,7 @@ public class Fox implements Renderable {
                 break;
         }
         shader.setMVPMatrix(mvp.collapseM(model));
+        shader.activate();
         shader.draw();
     }
 }
