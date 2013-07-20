@@ -24,6 +24,4 @@
                  android:enabled="true"
                  android:label="StarGazerMusicService" />
     </application>
-    
-    
 </manifest>

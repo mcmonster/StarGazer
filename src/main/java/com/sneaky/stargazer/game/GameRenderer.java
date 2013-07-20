@@ -11,7 +11,7 @@ import com.sneaky.stargazer.graphics.MVP;
 import com.sneaky.stargazer.graphics.Renderer;
 import com.sneaky.stargazer.graphics.flow.GameFlowController;
 import com.sneaky.stargazer.graphics.flow.GameTickEvent;
-import com.sneaky.stargazer.graphics.widgets.ProgressBar;
+import com.sneaky.stargazer.graphics.widgets.StarBag;
 import com.sneaky.stargazer.misc.geometry.Circle;
 import com.sneaky.stargazer.misc.geometry.GeometryHelper;
 import com.sneaky.stargazer.misc.points.Point2D;
@@ -33,8 +33,8 @@ public class GameRenderer extends Renderer {
     /** How many stars have been captured. */
     private int numCapturedStars = 0;
     
-    /** Progress bar represents the fox's progress through the level. */
-    private final ProgressBar progressBar;
+    /** Displays the number of caught stars. */
+    private final StarBag starBag;
     
     /** Used to create falling stars. */
     private final StarFallPattern starFallPattern;
@@ -53,13 +53,13 @@ public class GameRenderer extends Renderer {
                         Fox fox,
                         GameFlowController gameFlowController,
                         EventBus notifier,
-                        ProgressBar progressBar,
+                        StarBag starBag,
                         StarFallPattern starFallPattern) {
         super(gameFlowController, notifier);
         
         this.background = checkNotNull(background);
         this.fox = checkNotNull(fox);
-        this.progressBar = checkNotNull(progressBar);
+        this.starBag = checkNotNull(starBag);
         this.starFallPattern = checkNotNull(starFallPattern);
         
         notifier.register(this);
@@ -95,8 +95,7 @@ public class GameRenderer extends Renderer {
             star.render(mvp); // Draw the star
         }
         
-        progressBar.render(mvp);
-        progressBar.setTimeFrame(120 * 1000);
+        starBag.render(mvp);
         
         Log.d(TAG, "Run Time: " + (System.currentTimeMillis() - start));
     }

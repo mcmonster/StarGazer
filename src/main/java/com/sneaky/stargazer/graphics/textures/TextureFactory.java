@@ -14,6 +14,7 @@ import com.google.inject.Inject;
 import com.sneaky.stargazer.graphics.Color;
 import com.sneaky.stargazer.graphics.DrawMath;
 import com.sneaky.stargazer.misc.points.Dimension;
+import java.io.FileOutputStream;
 
 /**
  * Helper class providing common functionality related to textures.
@@ -150,14 +151,12 @@ public final class TextureFactory {
         // Load the texture into the graphics engine
         int resultTextureHandle = loadTexture(bitmap);
         
-        /*if (text.equals("8")) {
-            try {
-                FileOutputStream out = new FileOutputStream("/sdcard/HullabalooTest.jpg");
-                bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
+        try {
+            FileOutputStream out = new FileOutputStream("/sdcard/HullabalooTest.jpg");
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
         // Clean up
         bitmap.recycle();

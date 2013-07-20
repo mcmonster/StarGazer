@@ -11,6 +11,7 @@ import com.sneaky.stargazer.graphics.textures.Texture;
 import com.sneaky.stargazer.graphics.textures.TextureFactory;
 import com.sneaky.stargazer.device.SensorMonitor;
 import com.sneaky.stargazer.game.Star.StarFactory;
+import com.sneaky.stargazer.graphics.text.BitmapGlyphString.GlyphStringFactory;
 import com.sneaky.stargazer.graphics.textures.Animation;
 import java.util.Map;
 
@@ -47,6 +48,7 @@ public class GameModule extends BaseModule {
     }
     
     private void installFactories() {
+        install(new FactoryModuleBuilder().build(GlyphStringFactory.class));
         install(new FactoryModuleBuilder().build(StarFactory.class));
     }
     
@@ -76,6 +78,7 @@ public class GameModule extends BaseModule {
         textures.put("ProgressBarMoon", new Texture(R.drawable.progressbarmoon));
         textures.put("SimpleStar", new Texture(R.drawable.simplestar));
         textures.put("Sky", new Texture(4.0f, R.drawable.sky));
+        textures.put("StarBag", new Texture(R.drawable.starbag));
         
         for (Map.Entry<String, Texture> entry : textures.entrySet()) {
             Texture texture = entry.getValue();
